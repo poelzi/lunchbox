@@ -347,11 +347,12 @@ where
 mod tests {
     use super::ChrootFS;
     use crate::path::Path;
-    use crate::LocalFS;
     use crate::ReadableFileSystem;
     use crate::WritableFileSystem;
-    use tokio::io::AsyncReadExt;
-    use tokio::io::AsyncWriteExt;
+    #[cfg(feature = "localfs")]
+    use tokio::io::{AsyncReadExt, AsyncWriteExt};
+    #[cfg(feature = "localfs")]
+    use crate::LocalFS;
 
     #[test]
     /// Ensures that joining "absolute" paths to a prefix does not overwrite the prefix
